@@ -4,8 +4,7 @@ var router = express.Router();
 
 const config = require('../misc/config');
 
-/* GET home page. */
-router.get('/:barcode', function(req, res, next) {
+router.get('/nutritionix/:barcode', function(req, res, next) {
   const barcode = req.params.barcode;
 
   reqwest({
@@ -13,6 +12,20 @@ router.get('/:barcode', function(req, res, next) {
     method: 'get',
     headers: {
       'X-Mashape-Key': config.apiHeaderKey
+    }
+  }).then((response) => {
+    res.send(response);
+  });
+});
+
+router.get('/tesco/:barcode', function(req, res, next) {
+  const barcode = req.params.barcode;
+
+  reqwest({
+    url:  `${config.tescoFoodSearchAPI}?gtin=${barcode}`,
+    method: 'get',
+    headers: {
+      'Ocp-Apim-Subscription-Key': config.tescoApiHeaderKey
     }
   }).then((response) => {
     res.send(response);
