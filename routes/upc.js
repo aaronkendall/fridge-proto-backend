@@ -22,7 +22,7 @@ router.get('/tesco/:barcode', function(req, res, next) {
   const barcode = req.params.barcode;
 
   reqwest({
-    url:  `${config.tescoFoodSearchAPI}?gtin=${barcode}`,
+    url:  `${config.tescoBarcodeSearchAPI}?gtin=${barcode}`,
     method: 'get',
     headers: {
       'Ocp-Apim-Subscription-Key': config.tescoApiHeaderKey
